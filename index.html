@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow" data-publish>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{имя актёра}} · актёр театра, {{город}}</title>
+<meta name="description" content="Сайт-визитка актёра театра: роли, анкета, видео-визитка, афиша. Для режиссёров, кастинг-директоров и зрителей.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="{{имя актёра}}">
+<meta property="og:title" content="{{имя актёра}} · актёр театра, {{город}}">
+<meta property="og:description" content="Роли, анкета, видео-визитка и афиша. Пробы, проекты, спектакли – через одну кнопку.">
+<meta property="og:url" content="{{адрес сайта}}">
+<meta property="og:image" content="{{адрес сайта}}/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect x=%274%27 y=%274%27 width=%2712%27 height=%2724%27 fill=%27%234a1914%27/%3E%3Crect x=%2716%27 y=%274%27 width=%2712%27 height=%2724%27 fill=%27%23b8432f%27/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/wixmadefordisplay-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/golostext-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="vibe.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"{{имя актёра}}","jobTitle":"Актёр театра","url":"{{адрес сайта}}","image":"{{адрес сайта}}/assets/og.jpg","workLocation":"{{город}}"}
+</script>
+<style>
+  /* ---- тема: тёмная сцена, кость, занавесный красный ---------------------- */
+  .v-page {
+    --v-canvas: #1a1512; --v-surface: #241d18;
+    --v-ink: #efe4d3; --v-ink-soft: #ab9f8f;
+    --v-accent: #b8432f; --v-accent-ink: #fff3ea;
+    --v-font-display: "Wix Madefor Display", "Segoe UI", system-ui, sans-serif;
+    --v-font-text: "Golos Text", "Segoe UI", system-ui, sans-serif;
+    --v-shadow-color: 10 6 4;
+    --v-radius: 6px;
+    --curtain-a: #4a1914; --curtain-b: #5f221a; --curtain-c: #34100d;
+  }
+  .v-page .v-display { font-weight: 700; }
+  .v-page .v-label { font-weight: 500; }
+  .v-page .v-body, .v-page .v-lede { line-height: 1.65; }
+
+  /* ---- фирменный ход: занавес --------------------------------------------- */
+  /* две половины из складок (градиент, без картинок); степень открытия --open ведёт прокрутка акта:
+     сцена от --v-p, ткань собирается к краю (scaleX), как настоящий занавес */
+  .curtain { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 1; will-change: transform;
+    background:
+      linear-gradient(to bottom, rgb(0 0 0 / .32) 0%, transparent 18%, transparent 70%, rgb(0 0 0 / .4) 100%),
+      repeating-linear-gradient(90deg, var(--curtain-c) 0, var(--curtain-b) 2.2%, var(--curtain-a) 4.4%, var(--curtain-c) 6.6%); }
+  .curtain--l { left: 0; transform-origin: left center; box-shadow: 10px 0 40px rgb(0 0 0 / .45); }
+  .curtain--r { right: 0; transform-origin: right center; box-shadow: -10px 0 40px rgb(0 0 0 / .45); }
+  .valance { position: absolute; z-index: 2; top: 0; left: 0; right: 0; height: clamp(2.2rem, 7svh, 4rem); pointer-events: none;
+    background: linear-gradient(to bottom, #2b0d0a 0%, var(--curtain-a) 70%, #3d130f 100%); box-shadow: 0 8px 26px rgb(0 0 0 / .5); }
+  .valance::after { content: ""; position: absolute; left: 0; right: 0; bottom: -7px; height: 8px;
+    background: repeating-linear-gradient(90deg, #3d130f 0 14px, transparent 14px 20px); opacity: .9; }
+
+  /* ---- 1 · занавес открывается, за ним сцена --------------------------------- */
+  .hero { --open: min(1, calc(var(--v-p, 0) / .6)); }
+  .hero .curtain { transform: scaleX(calc(1 - var(--open) * .9)); }
+  .hero__stage { position: absolute; inset: 0; }
+  .hero__stage img { width: 100%; height: 100%; object-fit: cover; }
+  .hero__stage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, rgb(26 21 18 / .82) 0%, rgb(26 21 18 / .35) 55%, transparent 80%); }
+  .hero__copy { position: absolute; z-index: 3; left: var(--v-gutter); right: var(--v-gutter); bottom: clamp(3rem, 12vh, 8rem); max-width: 46rem; display: flex; flex-direction: column; gap: var(--v-5); }
+  .demo-for { align-self: flex-start; padding: var(--v-2) var(--v-4); border-radius: 999px; background: rgb(26 21 18 / .6); box-shadow: inset 0 0 0 1px var(--v-hair-strong); font-size: var(--v-t-sm); color: var(--v-ink); }
+  .hero__title { font-size: clamp(2.5rem, 1.2rem + 4.4vw, 5.6rem); line-height: .98; text-wrap: balance; text-shadow: 0 2px 22px rgb(0 0 0 / .55); }
+  .hero__lede { color: var(--v-ink); max-width: 36ch; text-shadow: 0 1px 12px rgb(0 0 0 / .6); }
+  .hero__cta { margin-top: var(--v-2); display: flex; flex-wrap: wrap; align-items: center; gap: var(--v-4) var(--v-6); }
+  .hero__hint { font-size: var(--v-t-sm); color: var(--v-ink-soft); max-width: 30ch; text-shadow: 0 1px 8px rgb(0 0 0 / .6); }
+  @media (max-width: 860px) {
+    .hero__stage::after { background: linear-gradient(to top, rgb(26 21 18 / .9) 0%, rgb(26 21 18 / .5) 50%, transparent 85%); }
+    .hero__title { font-size: clamp(2rem, 1.2rem + 3.6vw, 2.8rem); line-height: 1.02; }
+    .hero__cta { flex-direction: column; align-items: flex-start; gap: var(--v-3); }
+  }
+
+  /* ---- 2 · роли: лента, карточки разной ширины ------------------------------- */
+  .rail { align-items: center; height: 100%; padding: 0 var(--v-gutter); gap: var(--v-8); }
+  .rail__intro { flex: none; width: clamp(18rem, 30vw, 28rem); display: flex; flex-direction: column; gap: var(--v-4); }
+  .role { flex: none; width: clamp(16rem, 26vw, 24rem); min-height: 20rem; padding: var(--v-5) 0 var(--v-2); border-top: 1px solid var(--v-hair-strong); display: flex; flex-direction: column; gap: var(--v-3); }
+  .role--wide { width: clamp(18rem, 34vw, 32rem); }
+  .role--low { transform: translateY(9svh); }
+  .role--high { transform: translateY(-8svh); }
+  .role__year { font-size: var(--v-t-sm); color: var(--v-ink-soft); letter-spacing: var(--v-track-wide); text-transform: uppercase; }
+  .role__title { font-family: var(--v-font-display); font-weight: 700; font-size: var(--v-t-xl); line-height: 1.05; letter-spacing: var(--v-track-tight); text-wrap: balance; }
+  .role__part { font-size: var(--v-t-lg); color: var(--v-ink); line-height: 1.3; }
+  .role__meta { margin-top: auto; font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .rail__end { flex: none; width: 4vw; }
+  @media (max-width: 860px) { .role--low, .role--high { transform: none; } .rail { gap: var(--v-6); } .role { min-height: 18rem; } }
+
+  /* ---- 3 · анкета: театральная карточка актёра -------------------------------- */
+  .anketa { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  .anketa__fig { position: sticky; top: 8svh; aspect-ratio: 3 / 4; border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2); }
+  .anketa__fig img { width: 100%; height: 100%; object-fit: cover; }
+  .anketa__fig figcaption, .afisha__fig figcaption { position: absolute; left: var(--v-4); right: var(--v-4); bottom: var(--v-4); z-index: 1; font-size: var(--v-t-sm); color: #efe4d3; text-shadow: 0 1px 3px rgb(0 0 0 / .6); }
+  .anketa__fig::after, .afisha__fig::after { content: ""; position: absolute; inset: auto 0 0 0; height: 40%; background: linear-gradient(to top, rgb(16 11 8 / .78), transparent); pointer-events: none; }
+  .anketa__copy { display: flex; flex-direction: column; gap: var(--v-5); padding-top: var(--v-4); }
+  .card { display: flex; flex-direction: column; margin-top: var(--v-4); }
+  .card > div { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr; gap: var(--v-5); padding: var(--v-4) 0; border-top: 1px solid var(--v-hair); align-items: baseline; }
+  .card > div:last-child { border-bottom: 1px solid var(--v-hair); }
+  .card dt { font-size: var(--v-t-sm); letter-spacing: var(--v-track-wide); text-transform: uppercase; color: var(--v-ink-soft); }
+  .card dd { margin: 0; font-family: var(--v-font-display); font-weight: 600; font-size: var(--v-t-lg); line-height: 1.25; }
+  @media (max-width: 860px) {
+    .anketa { grid-template-columns: 1fr; }
+    .anketa__fig { position: relative; top: 0; aspect-ratio: 4 / 5; }
+    .card > div { grid-template-columns: 1fr; gap: var(--v-1); }
+  }
+
+  /* ---- 4 · видео-визитка --------------------------------------------------------- */
+  .reel-head { max-width: 46rem; display: flex; flex-direction: column; gap: var(--v-4); margin-bottom: var(--v-7); }
+  .reel { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2); text-decoration: none; }
+  .reel img { width: 100%; height: 100%; object-fit: cover; }
+  .reel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgb(16 11 8 / .82) 0%, rgb(16 11 8 / .25) 45%, rgb(16 11 8 / .1) 100%); }
+  .reel__play { position: absolute; z-index: 2; left: 50%; top: 46%; width: clamp(4.5rem, 9vw, 7rem); aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); background: rgb(184 67 47 / .92); box-shadow: var(--v-e2); transition: transform .18s var(--v-ease-out); }
+  .reel__play::before { content: ""; position: absolute; left: 54%; top: 50%; transform: translate(-50%, -50%); border-style: solid; border-width: .9rem 0 .9rem 1.5rem; border-color: transparent transparent transparent #fff3ea; }
+  .reel__cap { position: absolute; z-index: 2; left: var(--v-5); right: var(--v-5); bottom: var(--v-5); display: flex; justify-content: space-between; gap: var(--v-4); flex-wrap: wrap; font-size: var(--v-t-sm); color: #efe4d3; text-shadow: 0 1px 3px rgb(0 0 0 / .6); }
+  @media (hover: hover) and (pointer: fine) { .reel:hover .reel__play { transform: translate(-50%, -50%) scale(1.06); } }
+  .reel:active .reel__play { transform: translate(-50%, -50%) scale(.97); }
+
+  /* ---- 5 · афиша ---------------------------------------------------------------------- */
+  .afisha { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  .afisha__fig { position: sticky; top: 8svh; aspect-ratio: 3 / 4; border-radius: var(--v-radius); overflow: hidden; box-shadow: var(--v-e2); }
+  .afisha__fig img { width: 100%; height: 100%; object-fit: cover; }
+  .afisha__copy { display: flex; flex-direction: column; gap: var(--v-5); padding-top: var(--v-4); }
+  .bill { display: flex; flex-direction: column; margin-top: var(--v-4); }
+  .bill li { display: grid; grid-template-columns: minmax(6rem, 9rem) 1fr auto; gap: var(--v-5); padding: var(--v-5) 0; border-top: 1px solid var(--v-hair); align-items: baseline; }
+  .bill li:last-child { border-bottom: 1px solid var(--v-hair); }
+  .bill__date { font-family: var(--v-font-display); font-weight: 700; font-size: var(--v-t-lg); }
+  .bill__show { font-family: var(--v-font-display); font-weight: 600; font-size: var(--v-t-lg); line-height: 1.2; }
+  .bill__show small { display: block; margin-top: var(--v-1); font-family: var(--v-font-text); font-weight: 400; font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .bill a { display: inline-flex; align-items: center; min-height: 44px; color: var(--v-ink); font-weight: 500; }
+  @media (max-width: 860px) {
+    .afisha { grid-template-columns: 1fr; }
+    .afisha__fig { position: relative; top: 0; aspect-ratio: 4 / 5; order: 2; }
+    .bill li { grid-template-columns: 1fr auto; }
+    .bill__date { grid-column: 1 / -1; }
+  }
+
+  /* ---- 6 · финал: занавес закрывается --------------------------------------------- */
+  .fin { --close: max(0, min(1, calc((var(--v-p, 0) - .04) / .5))); }
+  .fin .curtain { transform: scaleX(calc(.1 + var(--close) * .9)); }
+  .fin__stage { position: absolute; inset: 0; }
+  .fin__stage img { width: 100%; height: 100%; object-fit: cover; opacity: .75; }
+  .fin__copy { position: absolute; z-index: 3; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(38rem, calc(100% - 2 * var(--v-gutter))); display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--v-5); }
+  .fin__title { text-shadow: 0 2px 22px rgb(0 0 0 / .55); text-wrap: balance; }
+  .fin__copy .v-lede { color: var(--v-ink); text-shadow: 0 1px 12px rgb(0 0 0 / .6); }
+  .fin__meta { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--v-1) var(--v-6); font-size: var(--v-t-sm); }
+  .fin__meta a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; font-weight: 500; color: var(--v-ink); text-shadow: 0 1px 8px rgb(0 0 0 / .6); }
+  .foot { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: var(--v-4) var(--v-gutter); display: flex; justify-content: space-between; gap: var(--v-4); flex-wrap: wrap; border-top: 1px solid var(--v-hair); font-size: var(--v-t-sm); color: var(--v-ink-soft); background: rgb(26 21 18 / .7); }
+  @media (prefers-reduced-motion: reduce) {
+    .hero .curtain { transform: scaleX(.1); }
+    .fin .curtain { transform: scaleX(1); }
+  }
+</style>
+</head>
+<body>
+<div class="v-page">
+  <div data-v-progress aria-hidden="true"></div>
+  <div class="v-grain" aria-hidden="true"></div>
+
+  <main>
+
+    <!-- 1 · ЗАНАВЕС: закрытый занавес, имя и оффер сразу на нём; по прокрутке раздвигается, за ним сцена -->
+    <section class="hero" id="hero" data-v-act="pin" data-v-span="2.4" aria-label="{{имя актёра}}, актёр театра">
+      <div data-v-stage>
+        <div class="hero__stage">
+          <img src="assets/stage.webp" srcset="assets/stage-800.webp 800w, assets/stage-1200.webp 1200w, assets/stage.webp 1920w" sizes="100vw" alt="Пустая театральная сцена: деревянный пол, один луч света сверху" width="1920" height="1067" fetchpriority="high">
+        </div>
+        <div class="curtain curtain--l" aria-hidden="true"></div>
+        <div class="curtain curtain--r" aria-hidden="true"></div>
+        <div class="valance" aria-hidden="true"></div>
+        <div class="hero__copy" data-v-cue="0 1 0 0" data-v-rise="0">
+          <p class="demo-for">Демо для overload224 · по заказу «Сайт-визитка для актера театра»</p>
+          <h1 class="v-display v-display--xl hero__title">{{имя актёра}} – актёр театра в {{город}}</h1>
+          <p class="v-lede hero__lede">Роли, спектакли, пробы. Для режиссёров, кастинг-директоров и зрителей.</p>
+          <div class="hero__cta">
+            <a class="v-btn" href="{{ссылка-связи}}">Написать актёру</a>
+            <p class="hero__hint">Приглашение на пробы, в проект или на спектакль – сюда.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · РОЛИ: лента карточек разной ширины, спектакль – роль – театр – год -->
+    <section id="roli" data-v-act="pan" data-v-span="3.2" aria-label="Роли">
+      <div data-v-stage>
+        <div class="rail" data-v-pan="0.05">
+          <div class="rail__intro">
+            <h2 class="v-display v-display--lg">Роли</h2>
+            <p class="v-body v-soft">Спектакль, роль, театр, год. Без пересказа сюжета: посмотреть можно на видео и в афише.</p>
+          </div>
+          <article class="role role--wide role--low">
+            <p class="role__year">{{год 1}}</p>
+            <h3 class="role__title">{{спектакль 1}}</h3>
+            <p class="role__part">{{роль 1}}</p>
+            <p class="role__meta">{{театр 1}}</p>
+          </article>
+          <article class="role role--high">
+            <p class="role__year">{{год 2}}</p>
+            <h3 class="role__title">{{спектакль 2}}</h3>
+            <p class="role__part">{{роль 2}}</p>
+            <p class="role__meta">{{театр 2}}</p>
+          </article>
+          <article class="role role--wide">
+            <p class="role__year">{{год 3}}</p>
+            <h3 class="role__title">{{спектакль 3}}</h3>
+            <p class="role__part">{{роль 3}}</p>
+            <p class="role__meta">{{театр 3}}</p>
+          </article>
+          <article class="role role--low">
+            <p class="role__year">{{год 4}}</p>
+            <h3 class="role__title">{{спектакль 4}}</h3>
+            <p class="role__part">{{роль 4}}</p>
+            <p class="role__meta">{{театр 4}}</p>
+          </article>
+          <div class="rail__end" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · АНКЕТА: то, что нужно режиссёру для проб, на одном экране -->
+    <section class="v-section" id="anketa" data-v-act="flow" aria-label="Анкета актёра">
+      <div class="v-wrap anketa">
+        <figure class="anketa__fig" data-v-reveal="left" data-v-reveal-at="0.1 0.5">
+          <img src="assets/dressing.webp" srcset="assets/dressing-800.webp 800w, assets/dressing.webp 1200w" sizes="(max-width: 860px) 100vw, 40vw" alt="Гримёрный стол: зеркало в тёплых лампах, тёмный пиджак на стуле, сложенный сценарий" width="1200" height="1600" loading="lazy" decoding="async">
+          <figcaption>Гримёрка перед выходом</figcaption>
+        </figure>
+        <div class="anketa__copy" data-v-in data-v-stagger="70">
+          <h2 class="v-display v-display--lg">Анкета актёра</h2>
+          <p class="v-body v-soft">Всё, что спрашивают на пробах, на одном экране: без запросов и переписки.</p>
+          <dl class="card">
+            <div><dt>Игровой возраст</dt><dd class="v-nums">{{игровой возраст}}</dd></div>
+            <div><dt>Рост</dt><dd class="v-nums">{{рост}}</dd></div>
+            <div><dt>Волосы и глаза</dt><dd>{{волосы и глаза}}</dd></div>
+            <div><dt>Голос и вокал</dt><dd>{{голос и вокал}}</dd></div>
+            <div><dt>Языки</dt><dd>{{языки}}</dd></div>
+            <div><dt>Образование</dt><dd>{{образование}}</dd></div>
+            <div><dt>Театр</dt><dd>{{театр}}</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · ВИДЕО-ВИЗИТКА: главный материал для проб -->
+    <section class="v-section" id="video" data-v-act="flow" aria-label="Видео-визитка">
+      <div class="v-wrap">
+        <div class="reel-head" data-v-in data-v-stagger="70">
+          <h2 class="v-display v-display--lg">Видео-визитка</h2>
+          <p class="v-body v-soft">Ролик с работами и голосом: с него удобно начать знакомство.</p>
+        </div>
+        <a class="reel" href="{{ссылка-видео}}" target="_blank" rel="noopener" aria-label="Смотреть видео-визитку" data-v-reveal="up" data-v-reveal-at="0.05 0.45">
+          <img src="assets/auditorium.webp" srcset="assets/auditorium-800.webp 800w, assets/auditorium-1200.webp 1200w, assets/auditorium.webp 1920w" sizes="(max-width: 860px) 100vw, 76rem" alt="Пустой зрительный зал: ряды красных кресел, свет люстры" width="1920" height="1067" loading="lazy" decoding="async">
+          <span class="reel__play" aria-hidden="true"></span>
+          <span class="reel__cap"><span>Смотреть видео-визитку</span><span>{{длительность}}</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 5 · АФИША: где увидеть на сцене (слоты, секцию убрать, если афиши нет) -->
+    <section class="v-section" id="afisha" data-v-act="flow" data-slot-optional aria-label="Афиша">
+      <div class="v-wrap afisha">
+        <figure class="afisha__fig" data-v-reveal="right" data-v-reveal-at="0.1 0.5">
+          <img src="assets/wings.webp" srcset="assets/wings-800.webp 800w, assets/wings.webp 1200w" sizes="(max-width: 860px) 100vw, 33vw" alt="Кулисы: канаты и край чёрного занавеса, полоска света со сцены" width="1200" height="1600" loading="lazy" decoding="async">
+          <figcaption>За минуту до выхода</figcaption>
+        </figure>
+        <div class="afisha__copy" data-v-in data-v-stagger="80">
+          <h2 class="v-display v-display--lg">Афиша</h2>
+          <p class="v-body v-soft">Ближайшие показы, в которых играет {{имя актёра}}.</p>
+          <ul class="bill">
+            <li><span class="bill__date v-nums">{{дата 1}}</span><span class="bill__show">{{спектакль 1}}<small>{{театр 1}}, {{сцена 1}}</small></span><a href="{{ссылка-билеты 1}}" target="_blank" rel="noopener">Билеты</a></li>
+            <li><span class="bill__date v-nums">{{дата 2}}</span><span class="bill__show">{{спектакль 2}}<small>{{театр 2}}, {{сцена 2}}</small></span><a href="{{ссылка-билеты 2}}" target="_blank" rel="noopener">Билеты</a></li>
+            <li><span class="bill__date v-nums">{{дата 3}}</span><span class="bill__show">{{спектакль 3}}<small>{{театр 3}}, {{сцена 3}}</small></span><a href="{{ссылка-билеты 3}}" target="_blank" rel="noopener">Билеты</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · ФИНАЛ: занавес закрывается, на нём одна кнопка -->
+    <section class="fin" id="final" data-v-act="pin" data-v-span="1.6" aria-label="Связаться с актёром">
+      <div data-v-stage>
+        <div class="fin__stage">
+          <img src="assets/stage.webp" srcset="assets/stage-800.webp 800w, assets/stage-1200.webp 1200w, assets/stage.webp 1920w" sizes="100vw" alt="" width="1920" height="1067" loading="lazy" decoding="async">
+        </div>
+        <div class="curtain curtain--l" aria-hidden="true"></div>
+        <div class="curtain curtain--r" aria-hidden="true"></div>
+        <div class="valance" aria-hidden="true"></div>
+        <div class="fin__copy" data-v-cue="0.34" data-v-rise="0">
+          <h2 class="v-display v-display--lg fin__title">Пробы, проекты, спектакли – напишите</h2>
+          <p class="v-lede">Приглашение, вопрос по роли или билетам – всё сюда.</p>
+          <a class="v-btn" href="{{ссылка-связи}}">Написать актёру</a>
+          <div class="fin__meta">
+            <a href="tel:{{телефон}}">{{телефон}}</a>
+            <a href="https://t.me/{{телеграм}}" target="_blank" rel="noopener" data-slot-optional>Telegram</a>
+            <a href="mailto:{{почта}}">{{почта}}</a>
+          </div>
+        </div>
+        <footer class="foot">
+          <span>{{имя актёра}} · {{город}}</span>
+          <span data-slot-optional>Агент: {{агент}}</span>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="vibe.js"></script>
+<script>
+  // На телефоне пины короче: hero 1,6 экрана, финал 1,4.
+  if (window.matchMedia('(max-width: 860px)').matches) {
+    document.getElementById('hero').setAttribute('data-v-span', '1.6');
+    document.getElementById('final').setAttribute('data-v-span', '1.4');
+  }
+  Vibe.mount(document.querySelector('.v-page'));
+</script>
+</body>
+</html>
